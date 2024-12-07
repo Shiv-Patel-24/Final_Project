@@ -97,7 +97,24 @@ h1{
     border-radius: 10px;
     background-color: rgba(0, 0, 255, 0.877);
     color: white;
+}
 
+.container2 form button:hover{
+    background-color: white;
+    color: rgba(0, 0, 255, 0.877);
+    font: bolder;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.delete_for_git{
+    font: 133px;
+    background-color: lightblue;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 /* .container2 input{
@@ -120,3 +137,12 @@ h1{
     color: white;
     border-radius: 10px;
 } */
+
+/* checking Github is working well or not? */
+/* This code will be delete soon */
+/* This code will be delete soon */
+/* This code will be delete soon */
+/* This code will be delete soon */
+/* This code will be delete soon */
+/* This code will be delete soon */
+/* Checking github is wokring well or not? */
