@@ -54,7 +54,7 @@ body{
     background-color: #eee;
 }
 
-h1{
+.container2 h1{
     margin: 0px auto;
     text-decoration: none;
     text-align: center;
@@ -146,3 +146,7 @@ h1{
 /* This code will be delete soon */
 /* This code will be delete soon */
 /* Checking github is wokring well or not? */
+
+.dashboard-container{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}

@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = 8080;
 const path = require("path");
+const mongoose = require("mongoose")
 
 app.use(express.urlencoded({ extended: true }));   //for url
 app.use(express.json());        //for JSON data
@@ -10,6 +11,21 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 
 app.use(express.static(path.join(__dirname, "public")));
+  
+// MONGODB CONNECTION 
+
+main().then(()=>{
+    console.log("Connection successful");
+}).catch((err) =>{
+    console.log("Error found", err);
+});
+
+async function main() {
+    await mongoose.connect("mongodb://127.0.0.1:27017/user")
+}
+
+//  TILL THIS PART MONGODB CONNECTION
+
 
 app.get("/login", (req, res) =>{            //This is GET request
     res.render("index.ejs");
@@ -38,6 +54,10 @@ app.post('/login', (req, res) => {
     }
     res.redirect('/login'); // Redirect after processing
 });
+
+app.get('/login/dashboard', (req, res) =>{
+    res.render("dashboard.ejs")
+})
 
 
 app.listen(port, ()=>{
