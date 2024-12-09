@@ -5,10 +5,9 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const User = require('/models/user');
 
-
 const app = express();
 
-
+// This app.js file
 app.use(bodyParser.json());
 
 
