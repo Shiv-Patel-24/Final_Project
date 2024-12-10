@@ -47,8 +47,8 @@ app.get("/login/new", (req, res) =>{
 // ------------------------------------------------
 
 app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-    console.log(`Username: ${username}, Password: ${password}`); // Debugging
+    const { username, password, email } = req.body;
+    console.log(`Username: ${username}, Password: ${password}, Email: ${email}`); // Debugging
     if (!username || !password) {
       return res.status(400).send('Username and password are required');
     }
