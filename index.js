@@ -57,6 +57,10 @@ app.post('/login', (req, res) => {
 
 app.get('/login/dashboard', (req, res) =>{
     res.render("dashboard.ejs")
+});
+
+app.get('/login/dashboard/final',(req, res) =>{
+    res.render("dashboardFinal.ejs")
 })
 
 
