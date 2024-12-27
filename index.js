@@ -32,6 +32,11 @@ app.get("/login", (req, res) =>{            //This is GET request
 });
 
 app.get("/login/new", (req, res) =>{
+    const {username, email, password} = req.body;
+    console.log(`Username: ${username}, Password: ${password}, Email: ${email}`); // Debugging
+    // if (!username || !password) {
+    //   return res.status(400).send('Username and password are required');
+    // }
     res.render("new.ejs")
 });
 
@@ -47,10 +52,10 @@ app.get("/login/new", (req, res) =>{
 // ------------------------------------------------
 
 app.post('/login', (req, res) => {
-    const { username, password, email } = req.body;
-    console.log(`Username: ${username}, Password: ${password}, Email: ${email}`); // Debugging
-    if (!username || !password) {
-      return res.status(400).send('Username and password are required');
+    const { password, email } = req.body;
+    console.log(`Password: ${password}, Email: ${email}`); // Debugging
+    if (!email || !password) {
+      return res.status(400).send('Email and password are required');
     }
     res.redirect('/login'); // Redirect after processing
 });
