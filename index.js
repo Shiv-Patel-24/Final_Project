@@ -3,6 +3,7 @@ const app = express();
 const port = 8080;
 const path = require("path");
 const mongoose = require("mongoose")
+const User = require('./models/user')
 
 app.use(express.urlencoded({ extended: true }));   //for url
 app.use(express.json());        //for JSON data
@@ -31,6 +32,8 @@ app.get("/login", (req, res) =>{            //This is GET request
     res.render("index.ejs");
 });
 
+
+// MY code
 app.get("/login/new", (req, res) =>{
     const {username, email, password} = req.body;
     console.log(`Username: ${username}, Password: ${password}, Email: ${email}`); // Debugging
@@ -40,24 +43,47 @@ app.get("/login/new", (req, res) =>{
     res.render("new.ejs")
 });
 
-// --------------  using another CODE ------------
-
-// app.post("/login", (req, res) =>{
-//     const {username, password} = req.body;
-//     console.log(username, password);
-//     // res.redirect("/login")
-//     res.send("final username entered")
-//     console.log(username, password)
-// })
-// ------------------------------------------------
 
 app.post('/login', (req, res) => {
     const { password, email } = req.body;
-    console.log(`Password: ${password}, Email: ${email}`); // Debugging
+    console.log(`This is login page : Password: ${password}, Email: ${email} `); // Debugging
     if (!email || !password) {
       return res.status(400).send('Email and password are required');
     }
     res.redirect('/login'); // Redirect after processing
+});
+
+// Route to create a new user
+app.post("/login/new", async (req, res) => {
+    const { username, email, password } = req.body;
+
+    try {
+        const newUser = new User({ username, email, password }); // Create a new user
+        await newUser.save(); // Save to the database
+        console.log("New user created:", newUser);
+        res.redirect('/login/dashboard');
+    } catch (err) {
+        console.error("Error creating user:", err);
+        res.status(500).send("Error creating user");
+    }
+});
+
+// Login route
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const user = await User.findOne({ email }); // Find user by email
+        if (user && user.password === password) {
+            console.log("User logged in:", user);
+            res.redirect('/login/dashboard');
+        } else {
+            res.status(400).send("Invalid email or password");
+        }
+    } catch (err) {
+        console.error("Error during login:", err);
+        res.status(500).send("Error during login");
+    }
 });
 
 app.get('/login/dashboard', (req, res) =>{
